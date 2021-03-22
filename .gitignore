@@ -1,0 +1,5 @@
+# Weight Files
+*.h5
+
+# cache
+*.pyc
