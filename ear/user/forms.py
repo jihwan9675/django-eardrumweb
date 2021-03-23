@@ -18,7 +18,7 @@ class LoginForm(forms.Form):
         if userid and password:
             try:
                 user = User.objects.get(userid=userid)
-            except user.DoesNotExist:
+            except User.DoesNotExist:
                 self.add_error('userid', '등록된 아이디가 없습니다.')
                 return
             
