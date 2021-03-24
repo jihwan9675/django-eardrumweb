@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic.edit import FormView
 from .forms import PredictForm
 from PIL import Image
+from .apps import PredictConfig
 
 class PredictView(FormView):
     template_name = 'predict.html'
@@ -21,6 +22,9 @@ def upload_file(request):
         request.FILES['file'].name = makefilename(request.session.get('user'), request.FILES['file'].name)
         if form.is_valid():
             form.save()
+            s = PredictConfig.detect_roi(PredictConfig, image_path=request.FILES['file'].name)
+            print(s)
+            #PredictConfig.predict(PredictConfig, request.FILES['file'].name)
             #image = Image.open('media/' +request.FILES['file'].name)
             #image.show()
             return HttpResponseRedirect('/')
@@ -34,3 +38,4 @@ def makefilename(id, filename):
     now = datetime.datetime.now()
     nowDate = now.strftime('%Y-%m-%d-%H%M%S')
     return id + '-' + nowDate + extension
+
