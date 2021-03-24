@@ -1,38 +1,11 @@
 {% extends "base.html" %}
 {% block contents %}
-<div>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-
-    <a class="navbar-brand" href="/">순천향대병원 이비인후과</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/">홈 <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="/predict/">진단<span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="/">조회<span class="sr-only">(current)</span></a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        {% if username != None %}
-        <a class="nav-link disabled" style="color:white;" href="#">{{ username }} 님 반갑습니다.</a>
-        <button type="button" class="btn btn-outline-success my-2 my-sm-0"
-          onclick="location.href='/logout/'">로그아웃</button>
-        {% else %}
-        <a class="nav-link disabled" style="color:white;" href="#"></a>
-        <button type="button" class="btn btn-outline-success my-2 my-sm-0"
-          onclick="location.href='/login/'">로그인</button>
-        {% endif %}
-      </form>
-    </div>
-  </nav>
-</div>
+<main class="flex-shrink-0">
+  <div class="container">
+    <h1 class="mt-5">환영합니다! 중이염 진단 웹 서비스 입니다.</h1>
+    <p class="lead">저는 순천향대학교 유비쿼터스 연구실 & ICT융합재활공학연구센터 소속 신지환 연구원입니다.</p>
+    <p><a href="https://github.com/jihwan9675">저의 깃허브 주소입니다.</a></p>
+    <p>010-9453-3849</p>
+  </div>
+</main>
 {% endblock %}

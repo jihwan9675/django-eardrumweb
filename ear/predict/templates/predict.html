@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block contents %}
+
+<div class="row mt-5">
+    <div class="col-12 text-center">
+        <h1>진단 서비스</h1>
+        <p>고막 이미지를 업로드 해주세요.</p>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-12 text-center" style="padding-bottom:10px">
+        <input type="file" id="image" accept="image/*" onchange="setThumbnail(event);" />
+    </div>
+    <div class="col-12 text-center" style="width:500px;" id="image_container">
+        <img id="imgs" src="">
+        <input type="submit" style="float:right;"value="진단하기"/>
+    </div>
+    
+</div>
+
+<script>
+    function setThumbnail(event) {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            var imgs = document.getElementById("imgs");
+            imgs.setAttribute("src", event.target.result);
+            imgs.setAttribute("style", "height:600px; width:600px;");
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+
+{% endblock %}

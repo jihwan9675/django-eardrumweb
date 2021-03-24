@@ -6,11 +6,13 @@ from .models import User
 
 def index(request):
     return render(request, 'index.html', {'username':request.session.get('user')})
-    # return render(request, 'index.html')
 
-def logout(request):
+def logout(request):    
     del(request.session['user'])
     return redirect('/')
+
+def annotation(request):
+    return render(request, 'via.html', {'username':request.session.get('user')})
 
 class LoginView(FormView):
     template_name = 'login.html'
