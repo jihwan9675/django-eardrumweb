@@ -2503,6 +2503,7 @@ class MaskRCNN(object):
                 "After resizing, all images must have the same size. Check IMAGE_RESIZE_MODE and image sizes."
 
         # Anchors
+
         anchors = self.get_anchors(image_shape)
         # Duplicate across the batch dimension because Keras requires it
         # TODO: can this be optimized to avoid duplicating the anchors?
@@ -2520,8 +2521,8 @@ class MaskRCNN(object):
         for i, image in enumerate(images):
             final_rois, final_class_ids, final_scores, final_masks =\
                 self.unmold_detections(detections[i], mrcnn_mask[i],
-                                       image.shape, molded_images[i].shape,
-                                       windows[i])
+                                    image.shape, molded_images[i].shape,
+                                    windows[i])
             results.append({
                 "rois": final_rois,
                 "class_ids": final_class_ids,
