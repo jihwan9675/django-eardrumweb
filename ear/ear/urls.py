@@ -19,7 +19,7 @@ from user.views import LoginView, RegisterView, index, logout, annotation
 from predict.views import PredictView
 from django.conf import settings
 from django.conf.urls.static import static
-from predict.views import upload_file
+
 urlpatterns = [
     path('', index),
     path('predict/', PredictView.as_view()),
@@ -28,5 +28,4 @@ urlpatterns = [
     path('login/', LoginView.as_view()),
     path('register/', RegisterView.as_view()),
     path('annotation/', annotation),
-    path('create/', upload_file),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

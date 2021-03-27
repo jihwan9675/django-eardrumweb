@@ -1,23 +1,24 @@
 from django import forms
 from .models import Predict
-
-class PredictForm(forms.Form):
-    userid = forms.CharField(error_messages={
-        'required': '아이디를 입력해주세요.'
-    }, max_length=64,label="아이디")
-    password = forms.CharField(error_messages={
-        'required':'비밀번호를 입력해주세요.'
-    },widget=forms.PasswordInput, label="비밀번호")
-
-    def clean(self):
-        cleaned_data = super().clean()
-
 from .models import UploadFileModel
+
+class PredictForm(forms.ModelForm):
+    file = forms.FileField() # image field
+
+    def __init__(self, request, *args, **kwargs):
+        super(PredictForm, self).__init__(*args, **kwargs)
+        self.request = request
+        self.fields['file'].required = False
+        print(self.request.FILES)
+
+    class Meta:
+        model = UploadFileModel
+        fields = ('file',)
 
 class UploadFileForm(forms.ModelForm):
     class Meta:
         model = UploadFileModel
-        fields = ('title', 'file')
+        fields = ('file',)
 
     def __init__(self, *args, **kwargs):
         super(UploadFileForm, self).__init__(*args, **kwargs)

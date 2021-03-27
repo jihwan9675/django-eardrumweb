@@ -13,12 +13,12 @@ from modules.CustomConfig import CustomConfig, InferenceConfig
 from modules.preprocess import preprocess
 from modules.build_model import build_model
 import tensorflow as tf
-
-
 from tensorflow.python.keras.backend import set_session
 
 
 class predictmodel():
+    eardrum = ["Normal","Traumatic Perforation", "Acute Otitis Media", "Chronic Otitis Media",
+            "Congential Cholesteatoma", "Otitis Media with Effusion", "I don't know"]
     sess = tf.compat.v1.Session()
     graph = tf.compat.v1.get_default_graph()
     set_session(sess)
@@ -51,9 +51,9 @@ class predictmodel():
             # Save Image include Detected information
             visualize.display_instances(image, r['rois'], r['masks'], r['class_ids'], 
                                 "Ear", r['scores'], 
-                                title="Predictions",filename="media/"+"detected"+image_path)
+                                title="Predictions",filename="media/"+"d_"+image_path)
             # Save Croped Image
-            skimage.io.imsave(self.directory+"cropped"+image_path, crop_image)
+            skimage.io.imsave(self.directory+"c_"+image_path, crop_image)
 
             return r['rois'].shape[0]
 
@@ -62,26 +62,26 @@ class predictmodel():
         with self.graph.as_default():
             set_session(self.sess)
             # Preprocess : Resize and CLAHE
-            img=preprocess(self.directory+"cropped"+image_path)
+            img=preprocess(self.directory+"c_"+image_path)
 
             # Predict
             prediction = self.classificationModel.predict(img, verbose=1)
 
             # Find Max value's Index
-            max_value=max(prediction[0])
-            print(max_value)
-            idx = np.where(prediction[0]==max_value)[0][0]
+            Accuracy=max(prediction[0])
+            idx = np.where(prediction[0]==Accuracy)[0][0]
 
-            return idx, max_value
+            return idx, Accuracy
 
     def predict(self, image_path):
-        result=self.detect_roi(image_path=image_path)
+        detected_instance_count=self.detect_roi(image_path=image_path)
         idx = 6
-        max_value = 0
-        if result > 0:
-            idx, max_value = self.predictEardiease(image_path)
-        packet = str(result) + " " + str(idx) + " " + str(max_value)
-        print(packet)
+        Accuracy = 0
+        if detected_instance_count > 0:
+            idx, Accuracy = self.predictEardiease(image_path)
+        
+        # return list ...  [DiseaseName, Count of Detected Instance, Accuracy]
+        return [self.eardrum[idx], detected_instance_count, Accuracy]
 
 class PredictConfig(AppConfig):
     name = 'predict'

@@ -1,33 +1,101 @@
 {% extends "base.html" %}
-{% block contents %}
+{% block header %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#upform').submit(function (e) {
+            e.preventDefault();  // disables submit's default action
+            var data = new FormData($('#upform').get(0));
+            console.log(data);
+            var btn = document.getElementById("upload");
+            btn.disabled = true;
+            $('#upload').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>진단중..');
+            $.ajax({
+                url: '/predict/',
+                type: 'POST',
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    data = JSON.parse(data); // converts string of json to object
+                    console.log(data)
+                    var s = data[0].fields
+                    console.log(s)
+                    var k = s.image
+                    console.log(k)
+                    var imgs = document.getElementById("imgs2");
+                    imgs.setAttribute("src", "/media/d_" + k);
+                    imgs.setAttribute("style", "height:400px; width:400px;text-align: center;");
+                    var imgs3 = document.getElementById("imgs3");
+                    imgs3.setAttribute("src", "/media/c_" + k);
+                    imgs3.setAttribute("style", "height:400px; width:400px;text-align: center;");
+                    var result = document.getElementById("result");
+                    $('#result').html("결과 : " + data[0].fields.result + "<br>정확도 : " + data[0].fields.accuracy * 100 + "%");
+                    $('#upload').html('진단하기');
+                    btn.disabled = false;
+                }
+            });
+            return false;
+        });
+    });
+    function setThumbnail(event) {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            var imgs = document.getElementById("imgs");
+            imgs.setAttribute("src", event.target.result);
+            imgs.setAttribute("style", "height:400px; width:400px;text-align: center;");
+            var imgs2 = document.getElementById("imgs2");
+            imgs2.setAttribute("src", " ");
+            imgs2.setAttribute("style", " ");
+            var imgs3 = document.getElementById("imgs3");
+            imgs3.setAttribute("src", " ");
+            imgs3.setAttribute("style", " ");
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+{% endblock %}
 
+{% block contents %}
+<!-- description -->
 <div class="row mt-5">
     <div class="col-12 text-center">
         <h1>진단 서비스</h1>
         <p>고막 이미지를 업로드 해주세요.</p>
     </div>
 </div>
+
+<!-- input Form -->
 <div class="row mt-2">
-    <div class="col-12 text-center" style="padding-bottom:10px">
-        <input type="file" id="image" accept="image/*" onchange="setThumbnail(event);" />
+    <div class="col-12 text-center" style="padding-bottom:10px;">
+        <form method="POST" id="upform" enctype="multipart/form-data" novalidate="">
+            {% csrf_token %}
+            <input type="{{ form.file.field.widget.input_type }}" id="{{ form.file.id_for_label }}"
+                placeholder="{{ form.file.label }}" name="{{ form.file.name }}" accept="image/*"
+                onchange="setThumbnail(event);" />
+            <button class="btn btn-primary" type="submit" id="upload">진단하기</button>
+        </form>
     </div>
-    <div class="col-12 text-center" style="width:500px;" id="image_container">
-        <img id="imgs" src="">
-        <input type="submit" style="float:right;"value="진단하기"/>
-    </div>
-    
+
 </div>
 
-<script>
-    function setThumbnail(event) {
-        var reader = new FileReader();
-        reader.onload = function (event) {
-            var imgs = document.getElementById("imgs");
-            imgs.setAttribute("src", event.target.result);
-            imgs.setAttribute("style", "height:600px; width:600px;");
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
-</script>
+{% endblock %}
 
+{% block contents3 %}
+<div>
+    <div style="padding-top:10px;text-align: center;">
+        <div id="images1" style="display: inline-block;">
+            <img id="imgs" src="">
+        </div>
+        <div id="images2" style="display: inline-block;">
+            <img id="imgs2" src="">
+        </div>
+        <div id="images3" style="display: inline-block;">
+            <img id="imgs3" src="">
+        </div>
+    </div>
+</div>
+<div>
+    <p id="result"></p>
+</div>
 {% endblock %}
