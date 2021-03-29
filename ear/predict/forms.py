@@ -9,7 +9,6 @@ class PredictForm(forms.ModelForm):
         super(PredictForm, self).__init__(*args, **kwargs)
         self.request = request
         self.fields['file'].required = False
-        print(self.request.FILES)
 
     class Meta:
         model = UploadFileModel

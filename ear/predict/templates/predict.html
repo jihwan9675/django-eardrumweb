@@ -24,13 +24,18 @@
                     var k = s.image
                     console.log(k)
                     var imgs = document.getElementById("imgs2");
-                    imgs.setAttribute("src", "/media/d_" + k);
-                    imgs.setAttribute("style", "height:400px; width:400px;text-align: center;");
                     var imgs3 = document.getElementById("imgs3");
-                    imgs3.setAttribute("src", "/media/c_" + k);
-                    imgs3.setAttribute("style", "height:400px; width:400px;text-align: center;");
                     var result = document.getElementById("result");
-                    $('#result').html("결과 : " + data[0].fields.result + "<br>정확도 : " + data[0].fields.accuracy * 100 + "%");
+                    if(s.count!=0){
+                        imgs.setAttribute("src", "/media/d_" + k);
+                        imgs.setAttribute("style", "height:400px; width:400px;text-align: center;");
+                        imgs3.setAttribute("src", "/media/c_" + k);
+                        imgs3.setAttribute("style", "height:400px; width:400px;text-align: center;");                        
+                        $('#result').html("결과 : " + data[0].fields.result + "<br>정확도 : " + data[0].fields.accuracy * 100 + "%");
+                    }
+                    else{
+                        $('#result').html("고막을 찾을 수 없습니다.");
+                    }
                     $('#upload').html('진단하기');
                     btn.disabled = false;
                 }
@@ -51,6 +56,7 @@
             var imgs3 = document.getElementById("imgs3");
             imgs3.setAttribute("src", " ");
             imgs3.setAttribute("style", " ");
+            $('#result').html(" ");
         };
         reader.readAsDataURL(event.target.files[0]);
     }

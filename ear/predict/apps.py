@@ -18,7 +18,7 @@ from tensorflow.python.keras.backend import set_session
 
 class predictmodel():
     eardrum = ["Normal","Traumatic Perforation", "Acute Otitis Media", "Chronic Otitis Media",
-            "Congential Cholesteatoma", "Otitis Media with Effusion", "I don't know"]
+               "Congential Cholesteatoma", "Otitis Media with Effusion", "I don't know"]
     sess = tf.compat.v1.Session()
     graph = tf.compat.v1.get_default_graph()
     set_session(sess)

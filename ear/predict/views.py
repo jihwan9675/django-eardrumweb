@@ -16,13 +16,6 @@ class PredictView(FormView):
     template_name = 'predict.html'
     form_class = PredictForm
 
-    def get_form_kwargs(self, **kwargs):
-        kw = super().get_form_kwargs(**kwargs)
-        kw.update({
-            'request': self.request
-        })
-        return kw
-
     def get(self, request, *args, **kwargs): # GET Method (preidct/)
         form = self.form_class(request, initial=self.initial)
         return render(request, self.template_name, {'form':form,'username':request.session.get('user')})
@@ -46,11 +39,17 @@ class PredictView(FormView):
                 accuracy = float(result[2])
             )
             predict.save()
-            
         data = serializers.serialize("json", [predict]) # Model -> JSON
 
         return JsonResponse(data,safe=False)
 
+    def get_form_kwargs(self, **kwargs):
+        kw = super().get_form_kwargs(**kwargs)
+        kw.update({
+            'request': self.request
+        })
+        return kw
+        
     def create_file_name(self, id, filename):
         extension = os.path.splitext(filename)[-1].lower() # split Extenstion name 
         now = datetime.datetime.now()
