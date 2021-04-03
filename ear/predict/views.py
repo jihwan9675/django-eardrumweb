@@ -11,7 +11,10 @@ from .forms import UploadFileForm
 from .models import Predict, UploadFileModel
 from user.models import User
 from decimal import Decimal
+from django.utils.decorators import method_decorator
+from user.decorators import login_required
 
+@method_decorator(login_required, name = 'dispatch')
 class PredictView(FormView):
     template_name = 'predict.html'
     form_class = PredictForm
