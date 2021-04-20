@@ -5,8 +5,10 @@ from user.models import User
 from django.utils.decorators import method_decorator
 from user.decorators import login_required
 
-@method_decorator(login_required, name = 'dispatch')
-class BoardView(generic.ListView):
+
+# Search user's diagnosis
+@method_decorator(login_required, name='dispatch') # Check Login
+class BoardView(generic.ListView): # http://ip:port/board
     model = Predict
     template_name = 'board.html'
 
@@ -15,6 +17,7 @@ class BoardView(generic.ListView):
         kw.update({
             'request': self.request
         })
+
         return kw
 
     def get_context_data(self, **kwargs):
@@ -23,7 +26,8 @@ class BoardView(generic.ListView):
         context['predict_list'] = Predict.objects.filter(user=user)
         context['username'] = self.request.session.get('user')
 
-        return context 
+        return context
+
 
 class BoarddetailView(generic.ListView):
     model = Predict
@@ -34,6 +38,7 @@ class BoarddetailView(generic.ListView):
         kw.update({
             'request': self.request
         })
+
         return kw
 
     def get_context_data(self, **kwargs):
@@ -42,4 +47,4 @@ class BoarddetailView(generic.ListView):
         context['predict_list'] = Predict.objects.filter(user=user)
         context['username'] = self.request.session.get('user')
 
-        return context 
+        return context
