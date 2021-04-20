@@ -1,6 +1,7 @@
-import os, datetime
+import os
+import datetime
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect,HttpResponse,JsonResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.views.generic.edit import FormView
 from django.core import serializers
 from .forms import PredictForm
@@ -14,37 +15,42 @@ from decimal import Decimal
 from django.utils.decorators import method_decorator
 from user.decorators import login_required
 
-@method_decorator(login_required, name = 'dispatch')
-class PredictView(FormView):
+
+@method_decorator(login_required, name='dispatch') # Check to login.
+class PredictView(FormView): # http://ip:port/predict
     template_name = 'predict.html'
     form_class = PredictForm
 
-    def get(self, request, *args, **kwargs): # GET Method (preidct/)
+    def get(self, request, *args, **kwargs):  # GET Method (preidct/)
         form = self.form_class(request, initial=self.initial)
-        return render(request, self.template_name, {'form':form,'username':request.session.get('user')})
+        return render(request, self.template_name, {'form': form, 'username': request.session.get('user')})
 
-    def post(self, request, *args, **kwargs): # POST Method (preidct/)
+    def post(self, request, *args, **kwargs):  # POST Method (preidct/)
         # rename 'request.FILES'
         # Ex) xxxx.jpg -> UserId-2021-03-01.jpg
-        request.FILES['file'].name = self.create_file_name(request.session.get('user'), request.FILES['file'].name)
+        request.FILES['file'].name = self.create_file_name(
+            request.session.get('user'), request.FILES['file'].name)
         form = UploadFileForm(request.POST, request.FILES)
-        
+
         if form.is_valid():
             form.save()
+
             # Predict ... result = [Disease Name, Count of Detected Instance, Accuracy]
-            result = PredictConfig.just.predict(image_path=request.FILES['file'].name)
+            result = PredictConfig.just.predict(
+                image_path=request.FILES['file'].name)
+
             # Save Model into Predict Table.
             predict = Predict(
-                user = User.objects.get(userid=request.session.get('user')),
-                result = result[0],
-                image = request.FILES['file'].name,
-                count = result[1], 
-                accuracy = float(result[2])
+                user=User.objects.get(userid=request.session.get('user')),
+                result=result[0],
+                image=request.FILES['file'].name,
+                count=result[1],
+                accuracy=float(result[2])
             )
             predict.save()
-        data = serializers.serialize("json", [predict]) # Model -> JSON
+        data = serializers.serialize("json", [predict])  # Model -> JSON
 
-        return JsonResponse(data,safe=False)
+        return JsonResponse(data, safe=False)
 
     def get_form_kwargs(self, **kwargs):
         kw = super().get_form_kwargs(**kwargs)
@@ -52,12 +58,12 @@ class PredictView(FormView):
             'request': self.request
         })
         return kw
-        
+
     def create_file_name(self, id, filename):
-        extension = os.path.splitext(filename)[-1].lower() # split Extenstion name 
+        extension = os.path.splitext(
+            filename)[-1].lower()  # split Extenstion name
         now = datetime.datetime.now()
         nowDate = now.strftime('%Y-%m-%d-%H%M%S')
 
         # Ex) UserId-2021-03-22.jpeg
         return id + '-' + nowDate + extension
-
