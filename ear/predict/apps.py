@@ -48,7 +48,7 @@ class predictmodel():
             y1, x1, y2, x2 = r['rois'][0] 
             crop_image=image[y1:y2,x1:x2]
 
-            # Save Image include Detected information
+            # Save Image include detection information
             visualize.display_instances(image, r['rois'], r['masks'], r['class_ids'], 
                                 "Ear", r['scores'], 
                                 title="Predictions",filename="media/"+"d_"+image_path)
