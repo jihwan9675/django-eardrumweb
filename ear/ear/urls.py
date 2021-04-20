@@ -14,12 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from user.views import LoginView, RegisterView, index, logout, annotation
 from predict.views import PredictView
 from django.conf import settings
 from django.conf.urls.static import static
 from board.views import BoardView
+
+
 urlpatterns = [
     path('', index),
     path('predict/', PredictView.as_view()),
