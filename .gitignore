@@ -1,5 +1,13 @@
 # Weight Files
 *.h5
 
+# db
+*.sqlite3
+
+# image files
+*.jpeg
+*.jpg
+*.png
+
 # cache
 *.pyc
