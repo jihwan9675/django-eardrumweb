@@ -2,11 +2,11 @@ from django.db import models
 
 
 class User(models.Model):
-    userid = models.CharField(max_length=64,
+    userid = models.CharField(max_length=32,
                               verbose_name='아이디')
     username = models.CharField(max_length=64,
                                 verbose_name='사용자명')
-    password = models.CharField(max_length=64,
+    password = models.CharField(max_length=128,
                                 verbose_name='비밀번호')
     level = models.CharField(max_length=8, verbose_name='등급', choices=(
         ('admin', 'admin'),

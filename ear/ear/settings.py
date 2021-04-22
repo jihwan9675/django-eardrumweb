@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = ')z&sjt%5u_cw0+c*6m2^vf1_rqi^wsfokb+9xck=)2c#$^3nn!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -88,8 +88,8 @@ DATABASES = {
     # I will change Name, User to os.env
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'insta',
-        'USER': 'newjihwan',
+        'NAME': 'test',
+        'USER': 'shinjihwan',
         'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '5432',
