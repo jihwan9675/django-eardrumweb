@@ -49,7 +49,7 @@
 
 3. 고막을 못찾는 사진일 경우
 
-    ![django - eardrum c7f9a291c1624aff8947b86ce4d8c7a6](https://user-images.githubusercontent.com/69146451/115763174-33fa2c80-a3df-11eb-8ae9-76be82ce12b8.gif)
+    ![django - eardrum c7f9a291c1624aff8947b86ce4d8c7a6 1](https://user-images.githubusercontent.com/69146451/115763985-fe097800-a3df-11eb-8279-4fb16a9b1547.gif)
 
 - 모바일과 Desktop 환경에서 모두 접근 가능한 웹으로 서비스를 제공할 예정이다.
 
