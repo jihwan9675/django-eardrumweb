@@ -31,11 +31,10 @@
 
 - 다음과 같이 6가지의 카테고리로 분류를 한다.
 
-![Untitled](https://user-images.githubusercontent.com/69146451/115763234-3f4d5800-a3df-11eb-878f-485f97ed12be.png)
+    ![Untitled](https://user-images.githubusercontent.com/69146451/115763234-3f4d5800-a3df-11eb-878f-485f97ed12be.png)
 
 - 서버구성은 다음과 같다.
     
-    ![kk](https://user-images.githubusercontent.com/69146451/115763209-3a88a400-a3df-11eb-9d89-a0c1bf8923b1.png)
     <img width="956" alt="_2021-04-22__9 36 07" src="https://user-images.githubusercontent.com/69146451/115763209-3a88a400-a3df-11eb-9d89-a0c1bf8923b1.png">
 
 ### 실행화면
