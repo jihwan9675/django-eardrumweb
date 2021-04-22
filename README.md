@@ -31,25 +31,25 @@
 
 - 다음과 같이 6가지의 카테고리로 분류를 한다.
 
-![django%20-%20eardrum%20c7f9a291c1624aff8947b86ce4d8c7a6/Untitled.png](django%20-%20eardrum%20c7f9a291c1624aff8947b86ce4d8c7a6/Untitled.png)
+![Untitled](https://user-images.githubusercontent.com/69146451/115763234-3f4d5800-a3df-11eb-878f-485f97ed12be.png)
 
 - 서버구성은 다음과 같다.
 
-    ![django%20-%20eardrum%20c7f9a291c1624aff8947b86ce4d8c7a6/_2021-04-22__9.36.07.png](django%20-%20eardrum%20c7f9a291c1624aff8947b86ce4d8c7a6/_2021-04-22__9.36.07.png)
+    <img width="956" alt="_2021-04-22__9 36 07" src="https://user-images.githubusercontent.com/69146451/115763209-3a88a400-a3df-11eb-9d89-a0c1bf8923b1.png">
 
 ### 실행화면
 
 1. 진단 화면(/predcit)
 
-    ![django%20-%20eardrum%20c7f9a291c1624aff8947b86ce4d8c7a6/ezgif.com-gif-maker.gif](django%20-%20eardrum%20c7f9a291c1624aff8947b86ce4d8c7a6/ezgif.com-gif-maker.gif)
+    ![ezgif com-gif-maker](https://user-images.githubusercontent.com/69146451/115763256-43797580-a3df-11eb-8d61-68e73dc7bc83.gif)
 
 2. 조회(/board)
 
-    ![django%20-%20eardrum%20c7f9a291c1624aff8947b86ce4d8c7a6.gif](django%20-%20eardrum%20c7f9a291c1624aff8947b86ce4d8c7a6.gif)
+    ![django - eardrum c7f9a291c1624aff8947b86ce4d8c7a6](https://user-images.githubusercontent.com/69146451/115763280-47a59300-a3df-11eb-85de-0a8376e408df.gif)
 
 3. 고막을 못찾는 사진일 경우
 
-    ![django%20-%20eardrum%20c7f9a291c1624aff8947b86ce4d8c7a6%201.gif](django%20-%20eardrum%20c7f9a291c1624aff8947b86ce4d8c7a6%201.gif)
+    ![django - eardrum c7f9a291c1624aff8947b86ce4d8c7a6](https://user-images.githubusercontent.com/69146451/115763174-33fa2c80-a3df-11eb-8ae9-76be82ce12b8.gif)
 
 - 모바일과 Desktop 환경에서 모두 접근 가능한 웹으로 서비스를 제공할 예정이다.
 
