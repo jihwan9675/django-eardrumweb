@@ -65,3 +65,4 @@
 ### 논문
 
 [졸업 논문](https://jihwan9675.github.io/Graduationpaper-Korean/)
+[SCI](https://github.com/jihwan9675/django-eardrumweb)
